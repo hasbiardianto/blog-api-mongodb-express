@@ -1,20 +1,21 @@
-require('dotenv').config();
-const express = require('express');
-const ConnectDB = require('./config/db');
-const PostRoute = require("./routes/PostRoute.js");
+import dotenv from 'dotenv'
+import express from 'express'
+import ConnectDB from './config/db.js';
+import router from './routes/PostRoute.js';
 
 const app = express();
+dotenv.config()
 
 // PORT
 const PORT = 5000 || process.env.PORT;
 
 // connect DB
-ConnectDB();
+ConnectDB()
 
 // json 
 app.use(express.json());
 
 // Route
-app.use(PostRoute);
+app.use(router)
 
 app.listen(PORT, ()=> console.log(`App Listening on port ${PORT}`));

@@ -1,1 +1,27 @@
 GET http://localhost:5000/posts
+
+###
+GET http://localhost:5000/post/test-blog3
+
+###
+POST http://localhost:5000/post
+Content-Type: application/json
+
+{
+    "title" : "Test Blog",
+    "slug" : "test-blog3",
+    "body" : "test test test"
+}
+
+###
+PATCH http://localhost:5000/post/65cf6dfb1218e14fa822c37d
+Content-Type: application/json
+
+{
+    "title" : "Blog ke-3",
+    "slug" : "test-blog3",
+    "body" : "test test blog ke 3"
+}
+
+###
+DELETE http://localhost:5000/post/65cf60d83decf89df59a484c
