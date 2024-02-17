@@ -1,21 +1,41 @@
-import dotenv from 'dotenv'
-import express from 'express'
-import ConnectDB from './config/db.js';
-import router from './routes/PostRoute.js';
+import dotenv from "dotenv";
+import express from "express";
+import router from "./routes/main.js";
+import ConnectDatabase from "./config/Database.js";
+import cookieParser from "cookie-parser";
+import MongoStore from "connect-mongo";
+import session from "express-session";
 
 const app = express();
-dotenv.config()
+dotenv.config();
 
 // PORT
 const PORT = 5000 || process.env.PORT;
 
 // connect DB
-ConnectDB()
+ConnectDatabase();
 
-// json 
+// json
 app.use(express.json());
 
-// Route
-app.use(router)
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
-app.listen(PORT, ()=> console.log(`App Listening on port ${PORT}`));
+app.use(
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: true,
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGODB_URI,
+    }),
+    // cookie: {
+    //   maxAge: new Date(Date.now() + 3600000),
+    // },
+  })
+);
+
+// Route
+app.use(router);
+
+app.listen(PORT, () => console.log(`App Listening on port ${PORT}`));

@@ -18,10 +18,8 @@ PATCH http://localhost:5000/post/65cf6dfb1218e14fa822c37d
 Content-Type: application/json
 
 {
-    "title" : "Blog ke-3",
-    "slug" : "test-blog3",
-    "body" : "test test blog ke 3"
+    "title" : "Blog ke-III"
 }
 
 ###
-DELETE http://localhost:5000/post/65cf60d83decf89df59a484c
+DELETE http://localhost:5000/post/65cf6dfb1218e14fa822c37d
