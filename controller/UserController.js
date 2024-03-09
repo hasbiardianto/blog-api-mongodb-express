@@ -36,7 +36,7 @@ export const loginUser = async (req, res) => {
   }
 };
 
-export const authMidleware = async (req, res) => {
+export const authMidleware = async (req, res, next) => {
   const token = req.cookies.token;
   if (!token) {
     return res.status(401).json({ message: "Unauthorized" });
@@ -47,4 +47,5 @@ export const authMidleware = async (req, res) => {
   } catch (error) {
     return res.status(401).json({ message: "Unauthorized" });
   }
+  next();
 };

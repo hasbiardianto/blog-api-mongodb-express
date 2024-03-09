@@ -6,16 +6,16 @@ import {
   updatePost,
   deletePost,
 } from "../controller/PostController.js";
-import { loginUser, registerUser } from "../controller/UserController.js";
+import { loginUser, registerUser, authMidleware } from "../controller/UserController.js";
 
 const router = express.Router();
 
 // Post
 router.get("/posts", getPost);
 router.get("/post/:slug", getOne);
-router.post("/post", addPost);
-router.patch("/post/:id", updatePost);
-router.delete("/post/:id", deletePost);
+router.post("/post", authMidleware, addPost);
+router.patch("/post/:id", authMidleware, updatePost);
+router.delete("/post/:id", authMidleware, deletePost);
 
 // User
 router.post("/login", loginUser);
